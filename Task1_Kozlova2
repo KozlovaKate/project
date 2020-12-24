@@ -12,7 +12,7 @@ def f(x):
 y = f(x)
 print(y)
 p = pth('results')
-res = p / 'task_01_307b_Gusev_8.txt'
+res = p / 'task_01_307b_Kozlova_10.txt'
 if not p.exists():
     p.mkdir(exist_ok=True)
     

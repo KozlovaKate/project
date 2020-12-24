@@ -1,0 +1,33 @@
+from pathlib import Path as pth
+from matplotlib import pyplot as plt
+import numpy as np
+from scipy.interpolate import interp1d
+
+A = 9.66459
+x = np.linspace(-10, 10, 10)
+
+def f(x):
+    return ((0.5+((np.cos (np.sin( abs((x)**2)-((A)**2))))**2)-0.5)
+      /((1+0.001*(((x)**2)+((A)**2)))**2))
+y = f(x)
+print(y)
+p = pth('results')
+res = p / 'task_01_307b_Gusev_8.txt'
+if not p.exists():
+    p.mkdir(exist_ok=True)
+    
+if p.exists():
+    with res.open('w') as f:
+        i = 0
+        for _x in x:
+            f.write(str(_x) + ' ' + str(y[i]) + '\n')
+            i += 1
+else:
+    print("Error: \'results\' dir does not exists")
+ynew = interp1d(x, y, kind = 'cubic')
+xnew = np.linspace(-10, 10, 260)
+plt.plot(xnew, ynew(xnew), '-')
+plt.grid()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()
